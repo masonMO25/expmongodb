@@ -1,5 +1,6 @@
 import express from "express";
-import controller from "./pet/controller";
+import bookRouter from "./book/routes.js";
+import controller from "./pet/controller.js";
 
 const PORT = 3000;
 const app = express();
@@ -19,6 +20,9 @@ app.get("/pet/readAll", (req, res) => {
   });
 });
 
+// Middleware - Sends any request to /book to the bookRouter
+app.use("/book", bookRouter);
+
 app.listen(PORT, () => {
-  console.info(`Server runninat at hhtp://localhost${PORT}/`);
+  console.info(`Server running at at https://localhost:${PORT}/`);
 });
