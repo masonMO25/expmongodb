@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 
 const URI = "mongodb://127.0.0.1:27017";
 
@@ -20,6 +20,18 @@ const controller = {
   readAll() {
     return bookCollection.find().toArray();
   },
+  destroyOne(id) {
+    return bookCollection.deleteOne({ _id: new ObjectId(id) });
+  },
 };
+
+controller
+  .destroyOne("63ec4432cc0504e7291fc988")
+  .then((results) => {
+    console.info(results);
+  })
+  .catch((error) => {
+    console.error(error.message);
+  });
 
 export default controller;
